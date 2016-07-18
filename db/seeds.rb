@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen'Us }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+#ユーザーのサンプルを生成
 User.create!(name: "Example User",
 			 email: "example@railstutorial.org",
 			password: "foobar",
@@ -26,4 +27,11 @@ User.create!(name: "Example User",
 				 activated: true,
 				 activated_at: Time.zone.now
 				)
+end
+
+#マイクロポストコンテンツの生成
+users = User.order(:created_at).take(6)
+50.times do
+  content = Faker::Lorem.sentence(5)
+  users.each { |user| user.microposts.create!(content: content) }
 end
